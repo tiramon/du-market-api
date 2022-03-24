@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Du Market
-  version: 0.0.1
+  version: 0.0.2
 tags:
   - name: order
   - name: market
@@ -50,6 +50,13 @@ paths:
       tags:
         - order
       operationId: getOrderByOrderId
+      parameters:
+        - name: orderId
+          in: path
+          schema:
+            type: integer
+            format: int64
+          required: true
       responses:
         200:
           description: OK
@@ -61,6 +68,13 @@ paths:
       tags:
         - order
       operationId: createAndUpdateOrder
+      parameters:
+        - name: orderId
+          in: path
+          schema:
+            type: integer
+            format: int64
+          required: true
       requestBody:
         content:
           json/application:
@@ -79,6 +93,13 @@ paths:
       tags:
         - order
       operationId: cancelOrder
+      parameters:
+        - name: orderId
+          in: path
+          schema:
+            type: integer
+            format: int64
+          required: true
       responses:
         204:
           description: OK
@@ -89,6 +110,13 @@ paths:
       tags:
         - order
       operationId: getOrdersByMarket
+      parameters:
+        - name: marketId
+          in: path
+          schema:
+            type: integer
+            format: int64
+          required: true
       responses:
         200:
           description: OK
@@ -103,6 +131,19 @@ paths:
       tags:
         - order
       operationId: getOrdersByMarketAndItemType
+      parameters:
+        - name: marketId
+          in: path
+          schema:
+            type: integer
+            format: int64
+          required: true
+        - name: itemTypeId
+          in: path
+          schema:
+            type: integer
+            format: int64
+          required: true
       responses:
         200:
           description: OK
