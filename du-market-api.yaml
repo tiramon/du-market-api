@@ -1,0 +1,266 @@
+openapi: 3.0.1
+info:
+  title: Du Market
+  version: 0.0.1
+tags:
+  - name: order
+  - name: market
+  - name: storage
+paths:
+  /orders:
+    get:
+      tags:
+        - order
+      operationId: getOrders
+      responses:
+        200:
+          description: OK
+          content:
+            json/application:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+    put:
+      tags:
+        - order
+      operationId: createAndUpdateOrders
+      requestBody:
+        content:
+          json/application:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Order'
+      responses:
+        200:
+          description: OK
+          content:
+            json/application:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+
+
+  /orders/{orderId}:
+    get:
+      tags:
+        - order
+      operationId: getOrderByOrderId
+      responses:
+        200:
+          description: OK
+          content:
+            json/application:
+              schema:
+                $ref: '#/components/schemas/Order'
+    put:
+      tags:
+        - order
+      operationId: createAndUpdateOrder
+      requestBody:
+        content:
+          json/application:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses: 
+        200:
+          description: OK
+          content:
+            json/application:
+              schema:
+                $ref: '#/components/schemas/Order'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      tags:
+        - order
+      operationId: cancelOrder
+      responses:
+        204:
+          description: OK
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+  /orders/market/{marketId}:
+    get:
+      tags:
+        - order
+      operationId: getOrdersByMarket
+      responses:
+        200:
+          description: OK
+          content:
+            json/application:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+  /orders/market/{marketId}/itemType/{itemTypeId}:
+    get:
+      tags:
+        - order
+      operationId: getOrdersByMarketAndItemType
+      responses:
+        200:
+          description: OK
+          content:
+            json/application:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+  /storages:
+    get:
+      tags:
+        - storage
+      operationId: getStorages
+      responses:
+        200:
+          description: OK
+          content:
+            json/application:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Storage'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    put:
+      tags:
+        - storage
+      operationId: createAndUpdateStorages
+      requestBody:
+        content:
+          json/application:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Storage'
+      responses:
+        200:
+          description: OK
+          content:
+            json/application:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Storage'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+components:
+  schemas:
+    Position:
+      type: object
+      required:
+        - x
+        - y
+        - z
+      properties:
+        x:
+          type: integer
+          format: int64
+        y:
+          type: integer
+          format: int64
+        z:
+          type: integer
+          format: int64
+    Market:
+      type: object
+      required:
+        - marketId
+        - position
+        - parentConstructId
+        - name
+        - capacity
+        - valueTax
+        - dailyStorageFee
+        - orderFee
+      properties:
+        marketId:
+          type: integer
+          format: int64
+        position: 
+          $ref: '#/components/schemas/Position'
+        parentConstructId:
+          type: integer
+          format: int64
+        name:
+          type: string
+        capacity:
+          type: integer
+          format: int64
+        valueTax:
+          type: number
+          format: double
+        dailyStorageFee:
+          type: number
+          format: double
+        orderFee:
+          type: number
+          format: double
+    Order:
+      type: object
+      required:
+        - marketId
+        - orderId
+        - itemType
+        - buyQuantity
+        - expirationDate
+        - unitPrice
+      properties:
+        marketId:
+          type: integer
+          format: int64
+        orderId:
+          type: integer
+          format: int64
+        itemType:
+          type: integer
+          format: int64
+        buyQuantity:
+          type: integer
+          format: int64
+        expirationDate:
+          type: integer
+          format: int64
+        updateDate:
+          type: integer
+          format: int64
+        unitPrice:
+          type: number
+          format: double
+        canceled:
+          type: boolean
+    Storage:
+      type: object
+      required:
+        - marketId
+        - itemType
+        - quantity
+        - purchased
+      properties:
+        marketId:
+          type: integer
+          format: int64
+        itemType:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int64
+        purchased:
+          type: boolean
+  securitySchemes:
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT    # optional, arbitrary value for documentation purposes
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid
+security:
+  - bearerAuth: []         # use the same name as above
