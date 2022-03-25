@@ -11,6 +11,12 @@ paths:
     get:
       tags:
         - order
+      parameters:
+        - name: active
+          in: query
+          schema:
+            type: boolean
+          required: false
       operationId: getOrders
       responses:
         200:
@@ -109,6 +115,11 @@ paths:
             type: integer
             format: int64
           required: true
+        - name: active
+          in: query
+          schema:
+            type: boolean
+          required: false
       responses:
         200:
           description: OK
@@ -136,6 +147,11 @@ paths:
             type: integer
             format: int64
           required: true
+        - name: active
+          in: query
+          schema:
+            type: boolean
+          required: false
       responses:
         200:
           description: OK
