@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Du Market
-  version: 0.1.0
+  version: 0.2.0
 tags:
   - name: order
   - name: market
@@ -17,12 +17,30 @@ paths:
           schema:
             type: boolean
           required: false
+        - name: marketId
+          in: query
+          schema:
+            type: integer
+            format: int64
+          required: false
+        - name: itemType
+          in: query
+          schema:
+            type: integer
+            format: int64
+          required: false
+        - name: planetId
+          in: query
+          schema:
+            type: integer
+            format: int64
+          required: false
       operationId: getOrders
       responses:
         200:
           description: OK
           content:
-            json/application:
+            application/json:
               schema:
                 type: array
                 items:
@@ -33,7 +51,7 @@ paths:
       operationId: createAndUpdateOrders
       requestBody:
         content:
-          json/application:
+          application/json:
             schema:
               type: array
               items:
@@ -42,7 +60,7 @@ paths:
         200:
           description: OK
           content:
-            json/application:
+            application/json:
               schema:
                 type: array
                 items:
@@ -67,7 +85,7 @@ paths:
         200:
           description: OK
           content:
-            json/application:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Order'
         404: 
@@ -78,14 +96,14 @@ paths:
       operationId: createAndUpdateOrder
       requestBody:
         content:
-          json/application:
+          application/json:
             schema:
               $ref: '#/components/schemas/Order'
       responses: 
         200:
           description: OK
           content:
-            json/application:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Order'
         401:
@@ -103,64 +121,7 @@ paths:
 #          $ref: '#/components/responses/UnauthorizedError'
 #        404: 
 #          description: id not found
-  /orders/market/{marketId}:
-    get:
-      tags:
-        - order
-      operationId: getOrdersByMarket
-      parameters:
-        - name: marketId
-          in: path
-          schema:
-            type: integer
-            format: int64
-          required: true
-        - name: active
-          in: query
-          schema:
-            type: boolean
-          required: false
-      responses:
-        200:
-          description: OK
-          content:
-            json/application:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Order'
-  /orders/market/{marketId}/itemType/{itemTypeId}:
-    get:
-      tags:
-        - order
-      operationId: getOrdersByMarketAndItemType
-      parameters:
-        - name: marketId
-          in: path
-          schema:
-            type: integer
-            format: int64
-          required: true
-        - name: itemTypeId
-          in: path
-          schema:
-            type: integer
-            format: int64
-          required: true
-        - name: active
-          in: query
-          schema:
-            type: boolean
-          required: false
-      responses:
-        200:
-          description: OK
-          content:
-            json/application:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Order'
+
   /storages:
     get:
       tags:
@@ -170,7 +131,7 @@ paths:
         200:
           description: OK
           content:
-            json/application:
+            application/json:
               schema:
                 type: array
                 items:
@@ -183,7 +144,7 @@ paths:
       operationId: createAndUpdateStorages
       requestBody:
         content:
-          json/application:
+          application/json:
             schema:
               type: array
               items:
@@ -192,7 +153,7 @@ paths:
         200:
           description: OK
           content:
-            json/application:
+            application/json:
               schema:
                 type: array
                 items:
