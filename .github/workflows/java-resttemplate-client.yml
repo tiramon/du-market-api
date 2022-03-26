@@ -23,7 +23,7 @@ jobs:
       - name: Find and Replace
         uses: jacobtomlinson/gha-find-replace@v2
         with:
-          find: "<source>1\.8<\/source>\s+<target>1\.8<\/target>"
+          find: "<source>1\\.8<\\/source>\\s+<target>1\\.8<\\/target>"
           replace: "<release>11</release>"
           include: java-resttemplate/pom.xml
           regex: true
