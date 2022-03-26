@@ -18,7 +18,14 @@ jobs:
 
       - run: npm install @openapitools/openapi-generator-cli -g
 
-      - run: npx @openapitools/openapi-generator-cli generate -i du-market-api.yaml -g java -o java --additional-properties=interfaceOnly=true,groupId=de.tiramon.du,artifactId=du-market-api-resttemplate-client,basePackage=de.tiramon.du.market,apiPackage=de.tiramon.du.market.api,modelPackage=de.tiramon.du.market.model,invokerPackage=de.tiramon.du.market.client,developerName=Tiramon,developerEmail=tiramon@tiramon.de,scmConnection=scm:git:git@github.com:tiramon/du-market-api.git,library=resttemplate
+      - run: npx @openapitools/openapi-generator-cli generate -i du-market-api.yaml -g java -o java-resttemplate --additional-properties=interfaceOnly=true,groupId=de.tiramon.du,artifactId=du-market-api-resttemplate-client,basePackage=de.tiramon.du.market,apiPackage=de.tiramon.du.market.api,modelPackage=de.tiramon.du.market.model,invokerPackage=de.tiramon.du.market.client,developerName=Tiramon,developerEmail=tiramon@tiramon.de,scmConnection=scm:git:git@github.com:tiramon/du-market-api.git,library=resttemplate
+
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "<source>1.8</source>\n                        <target>1.8</target>"
+          replace: "<release>11</release>"
+          regex: false
 
       - name: Set up JDK 11
         uses: actions/setup-java@v2
@@ -29,9 +36,9 @@ jobs:
           settings-path: ${{ github.workspace }}/java # location for the settings.xml file
 
       - name: Build with Maven
-        run: mvn -B package --file java/pom.xml
+        run: mvn -B package --file java-resttemplate/pom.xml
 
       - name: Publish to GitHub Packages Apache Maven
-        run: mvn deploy -B -s $GITHUB_WORKSPACE/java/settings.xml --file java/pom.xml -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/tiramon/du-market-api
+        run: mvn deploy -B -s $GITHUB_WORKSPACE/java-resttemplate/settings.xml --file java-resttemplate/pom.xml -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/tiramon/du-market-api
         env:
           GITHUB_TOKEN: ${{ github.token }}
