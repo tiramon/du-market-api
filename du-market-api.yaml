@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Du Market
-  version: 0.3.0
+  version: 0.4.0
 tags:
   - name: order
   - name: market
@@ -300,6 +300,9 @@ components:
           format: double
         canceled:
           type: boolean
+        timestamp:
+          type: integer
+          format: int64
     Storage:
       type: object
       required:
