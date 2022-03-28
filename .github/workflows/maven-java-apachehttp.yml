@@ -18,7 +18,7 @@ jobs:
     - uses: actions/checkout@v2
     - run: npm install @openapitools/openapi-generator-cli -g
 
-    - run: npx @openapitools/openapi-generator-cli generate -i du-market-api.yaml -g java -o java-apachehttp --additional-properties=interfaceOnly=true,groupId=de.tiramon.du,artifactId=du-market-api-resttemplate-client,basePackage=de.tiramon.du.market,apiPackage=de.tiramon.du.market.api,modelPackage=de.tiramon.du.market.model,invokerPackage=de.tiramon.du.market.client,developerName=Tiramon,developerEmail=tiramon@tiramon.de,scmConnection=scm:git:git@github.com:tiramon/du-market-api.git,library=apache-httpclient
+    - run: npx @openapitools/openapi-generator-cli generate -i du-market-api.yaml -g java -o java-apachehttp --additional-properties=interfaceOnly=true,groupId=de.tiramon.du,artifactId=du-market-api-apachehttp-client,basePackage=de.tiramon.du.market,apiPackage=de.tiramon.du.market.api,modelPackage=de.tiramon.du.market.model,invokerPackage=de.tiramon.du.market.client,developerName=Tiramon,developerEmail=tiramon@tiramon.de,scmConnection=scm:git:git@github.com:tiramon/du-market-api.git,library=apache-httpclient
 
     - name: Find and Replace
       uses: jacobtomlinson/gha-find-replace@v2
