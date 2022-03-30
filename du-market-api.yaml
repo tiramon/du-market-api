@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Du Market
-  version: 0.5.1
+  version: 0.6.0
 tags:
   - name: order
   - name: market
@@ -96,7 +96,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Order'
+                  $ref: '#/components/schemas/OrderStats'
 
   /orders/{orderId}:
     parameters:
@@ -330,6 +330,39 @@ components:
         timestamp:
           type: integer
           format: int64
+    OrderStats:
+      type: object
+      properties:
+        timestamp:
+          type: integer
+          format: int64
+        itemType:
+          type: integer
+          format: int64
+        buyValue:
+          type: number
+          format: double
+        sellValue:
+          type: number
+          format: double
+        buyStock:
+          type: integer
+          format: int64
+        sellStock:
+          type: integer
+          format: int64
+        buyMaxPrice:
+          type: number
+          format: double
+        sellMaxPrice:
+          type: number
+          format: double
+        buyMinPrice:
+          type: number
+          format: double
+        sellMinPrice:
+          type: number
+          format: double
     Storage:
       type: object
       required:
