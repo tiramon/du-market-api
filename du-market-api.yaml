@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Du Market
-  version: 0.5.0
+  version: 0.5.1
 tags:
   - name: order
   - name: market
@@ -87,7 +87,7 @@ paths:
             type: integer
             format: int64
           required: false
-      operationId: getOrders
+      operationId: getOrdersStats
       responses:
         200:
           description: OK
