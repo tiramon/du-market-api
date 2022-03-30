@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Du Market
-  version: 0.4.2
+  version: 0.5.0
 tags:
   - name: order
   - name: market
@@ -12,11 +12,6 @@ paths:
       tags:
         - order
       parameters:
-        - name: active
-          in: query
-          schema:
-            type: boolean
-          required: false
         - name: marketId
           in: query
           schema:
@@ -69,7 +64,39 @@ paths:
                   $ref: '#/components/schemas/Order'
         401:
           $ref: '#/components/responses/UnauthorizedError'
-
+  /orders/stats:
+    get:
+      tags:
+        - order
+      parameters:
+        - name: marketId
+          in: query
+          schema:
+            type: integer
+            format: int64
+          required: false
+        - name: itemType
+          in: query
+          schema:
+            type: integer
+            format: int64
+          required: false
+        - name: planetId
+          in: query
+          schema:
+            type: integer
+            format: int64
+          required: false
+      operationId: getOrders
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
 
   /orders/{orderId}:
     parameters:
