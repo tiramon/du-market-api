@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Du Market
-  version: 0.8.1
+  version: 0.8.0
 tags:
   - name: order
   - name: market
@@ -188,7 +188,7 @@ paths:
   /avgOrePrices:
     get:
       tags:
-        - market
+        - order
       operationId: getAvgOrePrices
       responses:
         200:
