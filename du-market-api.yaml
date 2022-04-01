@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Du Market
-  version: 0.8.3
+  version: 0.8.4
 tags:
   - name: order
   - name: market
@@ -431,7 +431,7 @@ components:
     AvgOrePrice:
       type: object
       properties:
-        item_type:
+        itemType:
           type: integer
           format: int64
         timestamp:
