@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Du Market
-  version: 0.8.2
+  version: 0.8.3
 tags:
   - name: order
   - name: market
@@ -431,14 +431,30 @@ components:
     AvgOrePrice:
       type: object
       properties:
-        name:
-          type: string
-        value:
-          type: integer
-          format: double
-        lastCheck:
+        item_type:
           type: integer
           format: int64
+        timestamp:
+          type: integer
+          format: int64
+        buyValue:
+          type: number
+          format: double
+        sellValue:
+          type: number
+          format: double
+        buyStock:
+          type: integer
+          format: int64
+        sellStock:
+          type: integer
+          format: int64
+        buyAvg:
+          type: number
+          format: double
+        sellAvg:
+          type: number
+          format: double
   securitySchemes:
     bearerAuth:            # arbitrary name for the security scheme
       type: http
